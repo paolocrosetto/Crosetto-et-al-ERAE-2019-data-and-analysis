@@ -41,5 +41,5 @@ fig3 <- ns %>% ggplot(aes(couleur_NS, mdiff, fill=couleur_NS))+geom_col()+
   theme(legend.position = "none")+xlab("NutriScore label color")+ylab("Mean number of changes, caddy 2 vs caddy 1")+
   ggtitle("Mean number of product changes by NutriScore label color, by subject")
 fig3
-ggsave("Figures/Figure 3a.png", width = 8, height = 5, units = "in", dpi = 300)
+ggsave("Figures/Figure_3a.png", width = 8, height = 5, units = "in", dpi = 300)
 
