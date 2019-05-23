@@ -1,6 +1,8 @@
 ###
 ### Crosetto, Lacroix, Muller, Ruffieux
-
+### ERAE 2019
+### Nutritional and economic impact of 5 alternative front-of-pack nutritional labels: experimental evidence
+###
 
 ### This file produces Figure 1 of the paper
 
@@ -12,35 +14,32 @@
 
 
 # getting individual indicator of nutritional performance (FSA/calories for the whole basket)
-ind <-  df %>% 
+indicator <-  df %>% 
   ungroup() %>% 
   group_by(treatment, subject, caddy) %>% 
   summarise(indicator = (sum(FSAKcal))/sum(actual_Kcal))
 
 # computing difference between first and second basket
-ind <- ind %>% 
+indicator <- indicator %>% 
   spread(caddy, indicator) %>% 
   mutate(diff = (`2`-`1`)) %>% 
   select(treatment, subject, FSA1 = `1`, FSA2 = `2`, diff)
 
-## TODO: rename neutre -- benchmark in the source data and then delete this
-ndf <- ind %>% filter(treatment != "NutriScore, limité" & !is.na(diff)) %>% 
-  ungroup() %>% 
-  mutate(treatment = fct_recode(treatment, "Benchmark" = "Neutre")) 
 
-###trying to create a chart that makes some sense. ladder chart?
-plotme <- ndf %>% 
+# summarizing data to be ready for plotting
+summary <- indicator %>% 
   group_by(treatment) %>%
   summarise(diffsem = sd(diff, na.rm = TRUE)/sqrt(n()),
             diff = round(mean(diff, na.rm = TRUE),2)) %>% 
   mutate(cil = diff-2*diffsem, cih = diff + 2*diffsem) %>% 
   mutate(label = treatment != "Benchmark") %>% 
   group_by(label) %>% 
-  mutate(avgeff = if_else(treatment == "Benchmark", mean(diff), NA))
+  mutate(avgeff = case_when(
+              label == T ~  mean(diff),
+              label == F ~  NA_real_))
 
-
-### Figure 1 -- without advanced theming
-fig1 <- plotme %>%
+# Figure 1 -- without advanced theming
+fig1 <- summary %>%
   ggplot() + 
   geom_errorbar(aes(x = reorder(treatment, -diff), ymin = cil, ymax = cih, group= reorder(treatment,-diff)), size=0.8, width = 0.1, position = position_dodge(width = 0.07))+
   geom_point(aes(reorder(treatment, -diff), diff, fill=reorder(treatment,-diff)), position = position_dodge(width = 0.07), size=8, pch=21)+
@@ -55,13 +54,10 @@ fig1 <- plotme %>%
   annotate(geom = "text", x = 6.35, y = -1.55+0.05, label = "average label effect", hjust=0)+
   annotate(geom = "text", x = 6.35, y = 0.05, label = "no effect", hjust=0, color = "indianred")
 fig1
-ggsave("Crosetto_et_al_ERAE2019_Figure_1.png", width = 9, height = 4, units = "in", dpi = 300)
+ggsave("Figures/Crosetto_et_al_ERAE2019_Figure_1.png", width = 9, height = 4, units = "in", dpi = 300)
 
 ## with the final theme
 #library(devtools)
 #devtools::install_github("hrbrmstr/hrbrthemes")
 #library(hrbrthemes)
 #fig1 + theme_ipsum_rc()+theme(legend.position = "none")
-
-
-

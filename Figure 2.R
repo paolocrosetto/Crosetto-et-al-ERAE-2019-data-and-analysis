@@ -1,6 +1,8 @@
 ###
 ### Crosetto, Lacroix, Muller, Ruffieux
-
+### ERAE 2019
+### Nutritional and economic impact of 5 alternative front-of-pack nutritional labels: experimental evidence
+###
 
 ### This file produces Figure 2 of the paper
 
@@ -23,24 +25,19 @@ ind <- ind %>%
   mutate(diff = (`2`-`1`)) %>% 
   select(treatment, subject, FSA1 = `1`, FSA2 = `2`, diff)
 
-## TODO: rename neutre -- benchmark in the source data and then delete this
-ndf <- ind %>% filter(treatment != "NutriScore, limité" & !is.na(diff)) %>% 
-  ungroup() %>% 
-  mutate(treatment = fct_recode(treatment, "Benchmark" = "Neutre")) 
-
 ## Figure 2
-fig2 <- ndf %>%
+fig2 <- ind %>%
   ggplot(aes(reorder(treatment,diff), diff, color=treatment)) +
   geom_boxplot(alpha = 1)+
   geom_jitter(height = 0, width = 0.3, alpha = 0.5)+
-  theme_minimal()+
   geom_hline(yintercept = 0, color = 'indianred', linetype = 'dashed')+
-  theme(legend.position = "none")+
   ylab("Absolute FSA score difference, basket 2 vs 1")+
   xlab("")+
-  scale_color_manual(values = c("#00B050","#E0270B", "skyblue", "grey10", "#ffd042", "grey78"), name = "")
+  scale_color_manual(values = rev(c("#ffd042", "#00B050","skyblue",  "grey10",  "#E0270B", "grey78")), name = "")+
+  theme_minimal()+
+  theme(legend.position = "none")
 fig2
-ggsave("Crosetto_et_al_ERAE2019_Figure_2.png", width = 8, height = 6, units = "in", dpi = 300)    
+ggsave("Figures/Crosetto_et_al_ERAE2019_Figure_2.png", width = 8, height = 6, units = "in", dpi = 300)    
 
 
 ## with the final theme

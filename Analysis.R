@@ -1,47 +1,36 @@
 #############################################
-### Label 4 data analysis
+### NEW INTRO HEADER
 #############################################
-
-## getting data
-setwd("~/Dropbox/Grenoble/Projects/Label4/09 - données/Données Brutes XP/")
-load(file = "label4_alldata.Rdata")
 
 ## libraries
 library(tidyverse)
-library(forcats)
-
-setwd("~/Dropbox/Grenoble/Projects/Label4/09 - données/Analysis/")
 
 
-## saving aside all the behavioral tracker data
-alldata <- df
+## TODOs
+# bring all library dependencies to the front up here
+# further clean the initial base 
+#   - eliminate NutriScore limité
+#   - factor levels
+#   - see in files below and treat accordingly
 
-## data cleaning
-df <- df %>% filter(bought == 1)
-df <- df %>% select(session_number, subject, treatment, date, personal_weight = weight.x, weight = weight.y, everything())
+df <- read_csv("ERAE_2019_data_initial_version_23_may_19.csv")
 
-## add the manually filled data
-source("fill_data.R")
+df <- df %>% 
+  filter(treatment != "NutriScore, limité")
 
-## detailed data cleaning
-source("Data_Cleaning.R")
+df <- df %>% 
+  mutate(treatment = fct_recode(treatment, "Benchmark" = "Neutre")) 
 
-### some testing on poverty and consumption
+write_csv("ERAE_2019_data_initial_version_23_may_19_noNSRL_newnames.csv")
 
+## Figure 1
+source("Figure 1.R")
 
-###exporting for chantal
-#exp <- df
-#WriteXLS::WriteXLS("exp","new_export_chantal.xlsx")
-
-## export for Cédric
-# source("Ced_export.R")
+## Figure 2
+source("Figure 2.R")
 
 
-## export data for Anne
-# source("Anne_export.R")
-
-##save data as .xls for others
-# WriteXLS::WriteXLS("df","alldata.xlsx")
+#### from here on: TODO
 
 ### demographics of the sample
 source("Demographics.R")
