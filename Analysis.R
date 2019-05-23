@@ -13,13 +13,35 @@ library(tidyverse)
 #   - factor levels
 #   - see in files below and treat accordingly
 
+## import data
 df <- read_csv("ERAE_2019_data_initial_version_23_may_19_noNSRL_newnames.csv")
+
+###################
+###   Figures   ###
+###################
 
 ## Figure 1
 source("Figure 1.R")
 
 ## Figure 2
 source("Figure 2.R")
+
+## Figure 3a -- NutriScore
+source("Figure 3a.R")
+
+## Figure 3b -- SENS
+# TODO
+
+## Figure 3c -- NutriMark
+
+## Figure 3d -- NutriCouleur
+
+## Figure 3e -- NutriRepère
+
+
+##################
+###   Tables   ###
+##################
 
 
 #### from here on: TODO
