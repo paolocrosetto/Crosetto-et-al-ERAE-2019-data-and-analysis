@@ -13,15 +13,7 @@ library(tidyverse)
 #   - factor levels
 #   - see in files below and treat accordingly
 
-df <- read_csv("ERAE_2019_data_initial_version_23_may_19.csv")
-
-df <- df %>% 
-  filter(treatment != "NutriScore, limité")
-
-df <- df %>% 
-  mutate(treatment = fct_recode(treatment, "Benchmark" = "Neutre")) 
-
-write_csv("ERAE_2019_data_initial_version_23_may_19_noNSRL_newnames.csv")
+df <- read_csv("ERAE_2019_data_initial_version_23_may_19_noNSRL_newnames.csv")
 
 ## Figure 1
 source("Figure 1.R")
