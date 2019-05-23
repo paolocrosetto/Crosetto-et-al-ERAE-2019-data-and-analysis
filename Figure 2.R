@@ -37,7 +37,7 @@ fig2 <- ind %>%
   theme_minimal()+
   theme(legend.position = "none")
 fig2
-ggsave("Figures/Crosetto_et_al_ERAE2019_Figure_2.png", width = 8, height = 6, units = "in", dpi = 300)    
+ggsave("Figures/Figure_2.png", width = 8, height = 6, units = "in", dpi = 300)    
 
 
 ## with the final theme

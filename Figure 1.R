@@ -54,7 +54,7 @@ fig1 <- summary %>%
   annotate(geom = "text", x = 6.35, y = -1.55+0.05, label = "average label effect", hjust=0)+
   annotate(geom = "text", x = 6.35, y = 0.05, label = "no effect", hjust=0, color = "indianred")
 fig1
-ggsave("Figures/Crosetto_et_al_ERAE2019_Figure_1.png", width = 9, height = 4, units = "in", dpi = 300)
+ggsave("Figures/Figure_1.png", width = 9, height = 4, units = "in", dpi = 300)
 
 ## with the final theme
 #library(devtools)
