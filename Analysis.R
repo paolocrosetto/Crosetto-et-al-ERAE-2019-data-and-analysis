@@ -30,7 +30,7 @@ source("Figure 2.R")
 source("Figure 3a.R")
 
 ## Figure 3b -- SENS
-# TODO
+source("Figure 3b.R")
 
 ## Figure 3c -- NutriMark
 
