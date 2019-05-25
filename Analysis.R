@@ -33,11 +33,13 @@ source("Figure 3a.R")
 source("Figure 3b.R")
 
 ## Figure 3c -- NutriMark
+source("Figure 3c.R")
 
 ## Figure 3d -- NutriCouleur
+source("Figure 3d.R")
 
 ## Figure 3e -- NutriRepère
-
+source("Figure 3e.R")
 
 ##################
 ###   Tables   ###
