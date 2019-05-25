@@ -32,13 +32,13 @@ ns <- ns %>% mutate(value = if_else(is.na(value), "no label", value))
 
 ## compute difference varibale for each nutrient and summairze to mean and confidence interval
 ns <- ns %>% 
-  spread(caddy,n, fill = 0)
+  spread(caddy,n, fill = 0) %>% 
   mutate(diff = `2` - `1`) %>% 
   group_by(key, value) %>% 
   summarise(mdiff = mean(diff, na.rm = T), sediff = sd(diff, na.rm = T)/sqrt(n())) %>% 
   mutate(cil = mdiff-2*sediff, cih = mdiff + 2*sediff) %>% 
   mutate(value = as.factor(value)) %>% 
-  mutate(value = fct_recode(value, "red" = "rouge", "green" = "vert", "no label" = "No label")) %>% 
+  mutate(value = fct_recode(value, "red" = "rouge", "green" = "vert")) %>% 
   mutate(value = fct_relevel(value, "no label", "red", "orange"))
 
 ns %>% ggplot(aes(value, mdiff, fill=value))+geom_col()+theme_minimal()+facet_grid(.~key)+
