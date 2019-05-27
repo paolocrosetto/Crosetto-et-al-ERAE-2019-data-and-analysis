@@ -41,6 +41,8 @@ ns <- ns %>%
   mutate(value = fct_recode(value, "red" = "rouge", "green" = "vert")) %>% 
   mutate(value = fct_relevel(value, "no label", "red", "orange"))
 
+
+## plotting -- Figure 3d NutriCouleur
 ns %>% ggplot(aes(value, mdiff, fill=value))+geom_col()+theme_minimal()+facet_grid(.~key)+
        geom_errorbar(aes(ymin = cil, ymax = cih), width = 0.1, color="grey40")+
        scale_fill_manual(name="", values = c("grey50", "#ef3340", "#f1b434", "#97d700"))+
