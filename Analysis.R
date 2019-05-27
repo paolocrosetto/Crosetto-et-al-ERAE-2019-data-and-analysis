@@ -45,8 +45,34 @@ source("Figure 3e.R")
 ###   Tables   ###
 ##################
 
+## NOTE
+## the tables formatting is different than the one in the final paper, as several cosmetic changes have been made by hand. 
+## the numbers, instead, are strictly the same. 
 
-#### from here on: TODO
+## Table 2 - WRST and t-tests 
+
+## Table 3 - diff-in-diff estimation
+
+## Table 4 - robustness checks
+
+## Table 5 - expenditure
+
+## Table 6 - expenditure diff-in-diff
+
+## Table 7 - behavioral indicators
+
+## Table 8 - qualitative label assessment
+
+## Table A.9 - sample demographics
+
+## Table B.10 - robustness diff-in-diff estimations
+
+## Table B.11 - diff-in-diff with individual controls
+
+
+
+
+#### from here on: OLD STUFF
 
 ### demographics of the sample
 source("Demographics.R")
