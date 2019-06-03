@@ -117,7 +117,7 @@ source("Table7.R")
 source("Table8.R")
 
 ## Table A.9 - sample demographics
-source("TableA9.R")
+source("Table9A.R")
 
 ## Table B.10 - robustness diff-in-diff estimations
 
