@@ -49,13 +49,14 @@ source("Figure 3e.R")
 source("Table2.R")
 
 ## Table 3 - diff-in-diff estimation, overall and by income class
-
+source("Table3.R")
 
 ## Table 4 - robustness checks
 
 ## Table 5 - expenditure
 
-## Table 6 - expenditure diff-in-diff
+## Table 6 - expenditure diff-in-difftest
+source("Table6.R")
 
 ## Table 7 - behavioral indicators
 
@@ -102,7 +103,7 @@ source("Behavioral_main.R")
 source("bycategory.R")
 
 ## What if we use LIM instead?
-#source("analysisLIM.R")
+#source("analysisLIM.R")œ
 
 ##what if we use salt instead?
 # source("analysisSALT.R")
