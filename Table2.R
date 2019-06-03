@@ -31,7 +31,7 @@ pairwise.wilcox.test(ind$diff, ind$treatment, p.adjust.method = "none") %>%
   tidy() %>% 
   mutate(p.value = round(p.value, 3)) %>% 
   spread(group1, p.value) %>% 
-  write_csv("Tables/Table1_upper.csv")
+  write_csv("Tables/Table2_upper.csv")
 
 
 ## Two-tailed t-tests, lower triangle of Table 2
@@ -39,13 +39,13 @@ pairwise.t.test(ind$diff, ind$treatment) %>%
   tidy() %>% 
   mutate(p.value = round(p.value, 3)) %>% 
   spread(group2, p.value) %>% 
-  write_csv("Tables/Table1_lower.csv")
+  write_csv("Tables/Table2_lower.csv")
 
 
 ## Mean effect of each label, diagonal of Table 2
 ind %>% 
   group_by(treatment) %>% 
   summarise(mean = round(mean(diff, na.rm = T),2)) %>% 
-  write_csv("Tables/Table1_diagonal.csv")
+  write_csv("Tables/Table2_diagonal.csv")
 
 
