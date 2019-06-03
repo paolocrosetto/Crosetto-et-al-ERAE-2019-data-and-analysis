@@ -25,6 +25,47 @@ df <- df %>%
          SugarKcal = (sucres_100/100)*actual_weight*actual_Kcal,
          SaltKcal = (sel_100/100)*actual_weight*actual_Kcal)
 
+# demogaphic variables
+
+# recoding education and translating from French levels to readable output
+df <- df %>% 
+  mutate(edu_categorical = fct_recode(education, "< high school" = "aucun", "< high school" = "bp",
+                           "< high school" = "cap", "high school" = "bac", "universty or >" = "sup2",
+                           "universty or >" = "sup4", "universty or >" = "autre"))
+
+# transforming age into a categorical variable
+df <- df %>% 
+  mutate(age_categorical = cut(age, breaks = c(0,29,44,59,100), labels = c("<30","30-44","45-59",">60")))
+
+# computing standard of living
+df <- df %>% 
+  mutate(income_numeric = case_when(
+    income=="0_1000" ~ 1000,
+    income=="1000_2000" ~ 1500,
+    income=="2000_3000" ~ 2500,
+    income=="3000_4000" ~ 3500,
+    income=="4000_5000" ~ 4500,
+    income=="5000_6000" ~ 5500,
+    income=="6000_7000" ~ 6500,
+    income=="7000_8000" ~ 7500,
+    income=="8000_plus" ~ 8000
+  ))
+
+# 0 children was coded as NA
+df <- df %>% 
+  mutate(children = if_else(is.na(children), 0, children))
+
+# computing living standards per year, then split into three equal groups
+df <- df %>% 
+  mutate(consumption_units = (1+(familysize-children-1)*0.5 + children*0.3)) %>% 
+  mutate(living_standard = income_numeric/consumption_units) %>% 
+  mutate(living_standard_year = living_standard*12) %>%
+  ungroup() %>% 
+  mutate(incomeclass = ntile(living_standard_year, 3))
+
+
+
+
 ###################
 ###   Figures   ###
 ###################
@@ -76,6 +117,7 @@ source("Table7.R")
 source("Table8.R")
 
 ## Table A.9 - sample demographics
+source("TableA9.R")
 
 ## Table B.10 - robustness diff-in-diff estimations
 
@@ -86,11 +128,6 @@ source("Table8.R")
 
 #### from here on: OLD STUFF
 
-### demographics of the sample
-source("Demographics.R")
-
-### some useless stuff
-source("Playground.R")
 
 
 ## Considering the FSA score first
@@ -102,12 +139,6 @@ source("main_plot_EN_revision.R")
 source("analysisFSA.R")
 source("analysisPauvres.R")
 
-##behavioral analysis
-source("Behavioral_main.R")
-
-
-##analysis by product category
-source("bycategory.R")
 
 ## What if we use LIM instead?
 #source("analysisLIM.R")œ
@@ -154,17 +185,6 @@ source("Regressions_weight.R")
 source("Regressions_allcontrols.R")
 
 source("Regressions_allcontrols_revision.R")
-
-
-
-
-#tests
-source("Tests.R")
-source("Tests_weight.R")
-source("Tests_LIM.R")
-
-#NSRL
-source("AnalysisNSRL.R")
 
 
 
