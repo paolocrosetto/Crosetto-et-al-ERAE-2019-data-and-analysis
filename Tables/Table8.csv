@@ -1,0 +1,13 @@
+var,NutriCouleur,NutriMark,NutriRepère,NutriScore,SENS
+help build a better diet,0.72,0.76,0.73,0.81,0.62
+help in following health recommendations,0.76,0.78,0.78,0.81,0.71
+easy to understand,0.89,0.91,0.85,0.94,0.91
+give information about food items to limit,0.72,0.81,0.73,0.79,0.77
+give information on the nutritional composition,0.75,0.71,0.68,0.6,0.46
+show me the nutritional quality,0.79,0.79,0.78,0.79,0.69
+a tip for good choices,0.65,0.74,0.61,0.73,0.65
+influence my shopping,0.65,0.71,0.66,0.72,0.63
+just advertisement,0.36,0.34,0.33,0.3,0.41
+precise,0.76,0.79,0.73,0.71,0.57
+reassuring,0.7,0.74,0.69,0.75,0.67
+useful,0.9,0.89,0.88,0.94,0.85

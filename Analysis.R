@@ -62,6 +62,7 @@ source("Table6.R")
 ## Table 7 - behavioral indicators
 
 ## Table 8 - qualitative label assessment
+source("Table8.R")
 
 ## Table A.9 - sample demographics
 
@@ -109,15 +110,8 @@ source("bycategory.R")
 ##what if we use salt instead?
 # source("analysisSALT.R")
 
-##price analysis
-source("AnalysisPrice.R")
-source("Price_advanced.R")
-source("Price_vs_FSA.R")
-source("Price_vs_FSA_R2_bare_cost.R")
 
 
-## Most used products
-source("AnalysisProduct.R")
 
 
 #regressions over difference variable
