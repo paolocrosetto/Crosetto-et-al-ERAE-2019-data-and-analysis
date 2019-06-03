@@ -46,9 +46,10 @@ source("Figure 3e.R")
 ##################
 
 ## Table 2 - WRST and t-tests 
-source("Table1.R")
+source("Table2.R")
 
-## Table 3 - diff-in-diff estimation
+## Table 3 - diff-in-diff estimation, overall and by income class
+
 
 ## Table 4 - robustness checks
 

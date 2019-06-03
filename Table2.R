@@ -4,7 +4,7 @@
 ### Nutritional and economic impact of 5 alternative front-of-pack nutritional labels: experimental evidence
 ###
 
-### This file produces Table 1 of the paper
+### This file produces Table 2 of the paper
 
 ## NOTE
 ## the produced table differs from the paper version in appearance
