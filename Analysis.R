@@ -17,6 +17,14 @@ library(broom)
 ## import data
 df <- read_csv("ERAE_2019_data_initial_version_23_may_19_noNSRL_newnames.csv")
 
+### this aprt: changes to be merged in the df later
+# calculating fat per Kcal
+df <- df %>% 
+  mutate(FatKcal = (lipides_100/100)*actual_weight*actual_Kcal,
+         SFAKcal = (ags_100/100)*actual_weight*actual_Kcal,
+         SugarKcal = (sucres_100/100)*actual_weight*actual_Kcal,
+         SaltKcal = (sel_100/100)*actual_weight*actual_Kcal)
+
 ###################
 ###   Figures   ###
 ###################
@@ -53,6 +61,7 @@ source("Table2.R")
 ##TODO source("Table3.R")
 
 ## Table 4 - robustness checks
+source("Table4.R")
 
 ## Table 5 - expenditure
 source("Table5.R")
