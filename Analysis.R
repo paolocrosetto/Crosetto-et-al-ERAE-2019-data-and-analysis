@@ -5,6 +5,7 @@
 ## libraries
 library(tidyverse)
 library(broom)
+library(huxtable)
 
 
 ## TODOs
@@ -56,13 +57,17 @@ df <- df %>%
   mutate(children = if_else(is.na(children), 0, children))
 
 # computing living standards per year, then split into three equal groups
-df <- df %>% 
+ls <- df %>% 
   mutate(consumption_units = (1+(familysize-children-1)*0.5 + children*0.3)) %>% 
   mutate(living_standard = income_numeric/consumption_units) %>% 
   mutate(living_standard_year = living_standard*12) %>%
   ungroup() %>% 
+  select(subject, living_standard_year) %>% 
+  distinct() %>% 
   mutate(incomeclass = ntile(living_standard_year, 3))
 
+df <- df %>% 
+  left_join(ls, by = "subject")
 
 
 
@@ -99,7 +104,7 @@ source("Figure 3e.R")
 source("Table2.R")
 
 ## Table 3 - diff-in-diff estimation, overall and by income class
-##TODO source("Table3.R")
+source("Table3.R")
 
 ## Table 4 - robustness checks
 source("Table4.R")
@@ -128,30 +133,6 @@ source("Table9A.R")
 
 #### from here on: OLD STUFF
 
-
-
-## Considering the FSA score first
-source("main_plot_EN_paper.R")
-source("neutre_paper.R")
-source("all_paper.R")
-source("all_paper_revision.R")
-source("main_plot_EN_revision.R")
-source("analysisFSA.R")
-source("analysisPauvres.R")
-
-
-## What if we use LIM instead?
-#source("analysisLIM.R")œ
-
-##what if we use salt instead?
-# source("analysisSALT.R")
-
-
-
-
-
-#regressions over difference variable
-source("Regressions.R")
 
 #regression over 'simple' variable
 source("Regressions_FSA.R")
