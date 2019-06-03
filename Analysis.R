@@ -4,6 +4,7 @@
 
 ## libraries
 library(tidyverse)
+library(broom)
 
 
 ## TODOs
@@ -60,7 +61,7 @@ source("Table5.R")
 source("Table6.R")
 
 ## Table 7 - behavioral indicators
-
+source("Table7.R")
 
 ## Table 8 - qualitative label assessment
 source("Table8.R")

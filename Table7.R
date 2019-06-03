@@ -73,7 +73,8 @@ chprod <- chprod %>%
   spread(change, nitem, fill = 0) %>%  
   group_by(treatment) %>% 
   select(-subject) %>%
-  summarise_all(mean)
+  summarise_all(mean) %>% 
+  mutate_each(funs(round(.,2)), -treatment)
 
 ## formatting as a wide table to later paste all the indicators together
 chprod <- chprod %>% 
@@ -98,7 +99,9 @@ track <- df %>%
 ningr <- track %>% 
   select(-avgNnutr) %>% 
   spread(caddy, avgNingr) %>% 
-  mutate(percdiff = 100*(`2` - `1`)/`1`)
+  mutate(percdiff = 100*(`2` - `1`)/`1`) %>% 
+  ungroup() %>% 
+  mutate_if(.predicate = is.numeric, funs(round(.,2)))
 
 # ingredients view table: formatting
 ningr <- ningr %>% 
@@ -113,7 +116,9 @@ ningr <- ningr %>%
 nnutr <- track %>% 
   select(-avgNingr) %>% 
   spread(caddy, avgNnutr) %>% 
-  mutate(percdiff = 100*(`2` - `1`)/`1`)
+  mutate(percdiff = 100*(`2` - `1`)/`1`)  %>% 
+  ungroup() %>% 
+  mutate_if(.predicate = is.numeric, funs(round(.,2)))
 
 # nutrition views table: formatting
 nnutr <- nnutr %>% 
@@ -135,102 +140,63 @@ rm(ningr, nnutr, numprod, chprod, track)
 
 #### Part 2: Statistical tests
 
-### statistical testing
 
-## N items preliminary
-bi <- df %>% select(subject, treatment, caddy, Nitem) %>% filter(treatment != "NutriScore, limité") %>% distinct() %>% as_tibble()
-bi <- bi %>% filter(!is.na(Nitem))
-bi <- bi %>% group_by(subject) %>% spread(caddy, Nitem) %>% filter(!is.na(`1`)) %>% filter(!is.na(`2`))
-bi <- bi %>% gather(caddy, Nitem, -subject, - treatment)
+## Number of products
 
-## basket 1: N across treatments
-kruskal.test(Nitem~treatment, data = bi[bi$caddy==1,]) ### significant 0.01091
-kruskal.test(Nitem~treatment, data = bi[bi$caddy==2,]) ### significant 0.00494
-##what about if we single out the benchmark?
-kruskal.test(Nitem~treatment, data = bi[bi$caddy==1 & bi$treatment != "Neutre",]) ### not significant, 0.372
-kruskal.test(Nitem~treatment, data = bi[bi$caddy==2 & bi$treatment != "Neutre",]) ### not significant, 0.214
+# creating the dataset
+nprod <- df %>% 
+  select(subject, treatment, caddy, Nitem) %>% 
+  distinct() %>% 
+  filter(!is.na(Nitem)) %>% 
+  group_by(subject) %>% 
+  spread(caddy, Nitem) %>% 
+  filter(!is.na(`1`)) %>% filter(!is.na(`2`)) %>% 
+  gather(caddy, Nitem, -subject, - treatment)
 
-## basket 2: N across treatments
 
-## by tratment: N2 vs N1
-library(broom)
-bi %>% group_by(treatment) %>% do(tidy(wilcox.test(.$Nitem~.$caddy, paired=T)))
+# for each treatment, test if there is significant difference across caddies
+nprod <- nprod %>% 
+  group_by(treatment) %>% 
+  do(tidy(wilcox.test(.$Nitem~.$caddy, paired=T))) %>% 
+  select(treatment, p.value) %>% 
+  mutate(test = "WSRT nprod") 
+  
 
 
 ## number of ingredeints views
-Ningr <- df %>% select(treatment, subject, caddy, Ningr) %>%
-  filter(treatment != "NutriScore, limité") %>% 
-  distinct() %>% filter(!is.na(Ningr)) %>% filter(subject!=5251645) %>%  filter(subject != 4984054) %>% as_tibble()
 
-#by treatment: N2 vs N1
-Ningr %>% group_by(treatment) %>% do(tidy(wilcox.test(.$Ningr~.$caddy, paired=T)))
+# dataset
+ningr <- df %>% 
+  select(treatment, subject, caddy, Ningr) %>%
+  distinct() %>% 
+  filter(!is.na(Ningr)) %>% 
+  filter(subject!=5251645) %>%  filter(subject != 4984054)
 
-#making 'neutre' the base category
-Ningr$treatment <- relevel(Ningr$treatment, "Neutre")
+# for each treatment, test if there is significant difference across caddies
+ningr <- ningr %>% 
+  group_by(treatment) %>% 
+  do(tidy(wilcox.test(.$Ningr~.$caddy, paired=T))) %>% 
+  select(treatment, p.value) %>% 
+  mutate(test = "WSRT nviews")
 
-## alterantively: interacted regrssion
-summary(lm(Ningr~treatment*caddy, data=Ningr))
 
 ## number of nutrition views
-Nnutr <- df %>% select(treatment, subject, caddy, Nnutr) %>%
-  filter(treatment != "NutriScore, limité") %>% 
-  distinct() %>% filter(!is.na(Nnutr)) %>% filter(subject!=5251645) %>%  filter(subject != 4984054) %>% as_tibble()
+nnutr <- df %>% 
+  select(treatment, subject, caddy, Nnutr) %>%
+  distinct() %>% 
+  filter(!is.na(Nnutr)) %>% 
+  filter(subject!=5251645) %>%  filter(subject != 4984054) 
 
-#by treatment: N2 vs N1
-Nnutr %>% group_by(treatment) %>%
-  do(tidy(wilcox.test(.$Nnutr~.$caddy, paired=T)))
-
-#making 'neutre' the base category
-Nnutr$treatment <- relevel(Nnutr$treatment, "Neutre")
-
-
-## agains neutre
-Nnutr %>% group_by(subject, treatment) %>% spread(caddy, Nnutr) %>% mutate(diff = `2` - `1`) -> testme
-testme %>% filter(treatment == "Neutre" | treatment == "SENS") %>%
-  ungroup() %>% 
-  mutate(treatment = as.character(treatment)) -> testme
-wilcox.test(diff~treatment, data=testme)
+# for each treatment, test if there is significant difference across caddies
+nnutr <- nnutr %>% group_by(treatment) %>%
+  do(tidy(wilcox.test(.$Nnutr~.$caddy, paired=T)))%>% 
+  select(treatment, p.value) %>% 
+  mutate(test = "WSRT nnutr")
 
 
+## putting it all together
+rbind(nprod, nnutr, ningr) %>% 
+  write_csv("Tables/Table7_tests.csv")
 
-## number of displayed items
-Ndisp <- df %>% select(treatment, subject, caddy, Ndisp, Nproducts) %>%
-  filter(treatment != "NutriScore, limité") %>% 
-  distinct() %>% filter(!is.na(Ndisp)) %>% filter(subject!=5251645) %>%  filter(subject != 4984054) %>% as_tibble()
-
-# displayed but not bought, in general
-Ndisp %>% 
-  mutate(notbought = Ndisp - Nproducts) %>% 
-  group_by(treatment, caddy) %>% 
-  summarise(nbmean = mean(notbought, na.rm = T)) %>% 
-  spread(treatment, nbmean) %>% 
-  xtable()
-
-#by treatment: N2 vs N1
-Ndisp %>% 
-  mutate(notbought = Ndisp - Nproducts) %>% 
-  group_by(treatment) %>% 
-  do(tidy(wilcox.test(.$notbought~.$caddy, paired=T))) 
-
-### what is the score FSA of the items displayed but not bought vs the one of items bought?
-sub_treat <- df %>% 
-             select(subject, treatment) %>% 
-             filter(treatment != "NutriScore, limité") %>% 
-             distinct()
-
-alldata$disp[is.na(alldata$disp)] <- 0
-alldata %>% 
-  as_tibble() %>% 
-  filter(subject != 5924054) %>% 
-  filter(subject != 5407546 & subject!= 5044054 & subject != 5091645) %>% 
-  select(subject, caddy, disp, bought, scoreFSA) %>% 
-  left_join(sub_treat, by = "subject")  %>% 
-  filter(!is.na(treatment)) %>% 
-  filter(treatment != "NSRL") %>% 
-  filter(disp == 1) -> dispbought
-
-dispbought %>% 
-  group_by(treatment, caddy, disp, bought) %>% 
-  summarise(meanfsa = mean(scoreFSA, na.rm = T)) %>% 
-  arrange(treatment, caddy, disp, bought) -> dispboughtmeans
-  
+## cleanup
+rm(nprod, nnutr, ningr)
