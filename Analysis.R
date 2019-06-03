@@ -49,7 +49,7 @@ source("Figure 3e.R")
 source("Table2.R")
 
 ## Table 3 - diff-in-diff estimation, overall and by income class
-source("Table3.R")
+##TODO source("Table3.R")
 
 ## Table 4 - robustness checks
 
@@ -60,6 +60,7 @@ source("Table5.R")
 source("Table6.R")
 
 ## Table 7 - behavioral indicators
+
 
 ## Table 8 - qualitative label assessment
 source("Table8.R")
@@ -81,12 +82,6 @@ source("Demographics.R")
 ### some useless stuff
 source("Playground.R")
 
-## for revision: alternative income definitions
-#source("Income_revision.R")
-
-## declarative analysis of labels
-source("Declaratif.R")
-source("Declaratif_summaryTable.R")
 
 ## Considering the FSA score first
 source("main_plot_EN_paper.R")
