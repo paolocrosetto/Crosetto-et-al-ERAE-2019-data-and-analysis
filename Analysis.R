@@ -54,6 +54,7 @@ source("Table3.R")
 ## Table 4 - robustness checks
 
 ## Table 5 - expenditure
+source("Table5.R")
 
 ## Table 6 - expenditure diff-in-difftest
 source("Table6.R")

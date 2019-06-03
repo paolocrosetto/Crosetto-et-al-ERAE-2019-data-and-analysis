@@ -1,0 +1,7 @@
+treatment,1,2,diff,p-value
+Benchmark,36.44,36.49,0.05,0.65
+NutriCouleur,30.86,29.76,-1.11,0
+NutriMark,33.94,32.98,-0.96,0.03
+NutriRepère,33.47,34.01,0.54,0.86
+NutriScore,30.03,29.29,-0.73,0.46
+SENS,32.83,33.04,0.21,0.9
