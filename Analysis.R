@@ -45,11 +45,8 @@ source("Figure 3e.R")
 ###   Tables   ###
 ##################
 
-## NOTE
-## the tables formatting is different than the one in the final paper, as several cosmetic changes have been made by hand. 
-## the numbers, instead, are strictly the same. 
-
 ## Table 2 - WRST and t-tests 
+source("Table1.R")
 
 ## Table 3 - diff-in-diff estimation
 
@@ -98,11 +95,7 @@ source("analysisPauvres.R")
 
 ##behavioral analysis
 source("Behavioral_main.R")
-source("Behavioral_NS.R")
-source("Behavioral_NM.R")
-source("Behavioral_NC.R")
-source("Behavioral_NR.R")
-source("Behavioral_SENS.R")
+
 
 ##analysis by product category
 source("bycategory.R")
