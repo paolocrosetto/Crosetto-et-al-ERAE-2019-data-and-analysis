@@ -14,7 +14,7 @@
 ## getting the needed demographic varibales
 regdemo <- df %>%
   ungroup() %>%
-  select(subject, personal_weight, height, female, age_categorical, income2,
+  select(subject, personal_weight, height, female, age_categorical,
          incomeclass, edu_categorical, familysize, children,occupation) %>%
   distinct()
 

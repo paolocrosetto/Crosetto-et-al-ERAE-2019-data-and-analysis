@@ -11,15 +11,13 @@ library(huxtable)
 ## TODOs
 # bring all library dependencies to the front up here
 # further clean the initial base 
-#   - eliminate NutriScore limité
-#   - factor levels
 #   - see in files below and treat accordingly
 #   - MOVE Table B11 to the paper (as it has changed slightly)
 #   - MOVE Table B10 to the paper (removed one column, normalization by weight)
 #   - MOVE figure 3 (all of it) to the paper just in case
 
 ## import data
-df <- read_csv("alldata_june_4th.csv")
+df <- read_csv("usethis.csv")
 
 
 ###################
