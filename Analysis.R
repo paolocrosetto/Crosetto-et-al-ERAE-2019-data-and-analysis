@@ -1,6 +1,25 @@
-#############################################
-### TODO NEW INTRO HEADER
-#############################################
+###
+### Crosetto, Lacroix, Muller, Ruffieux
+### ERAE 2019
+### Nutritional and economic impact of 5 alternative front-of-pack nutritional labels: experimental evidence
+###
+
+### Ful analysis to reproduce all Figures and Tables of the paper
+###
+### 1. install dependencies
+### 2. run this script
+### 3. Figures are then stored in the Figures/ subdirectory, and Tables in the Tables/ one
+### 4. Figures are identical to the ones in the paper but for the appearance and theming 
+###    (code to produce the fianl theming is provided but need further dependencies not available on CRAN)
+### 5. Tables contain the same numbers and information as in the paper but their appearance is generally different
+###    (because the paper is .tex and because some tweakings were done by hand)
+###
+### License CC BY-NC-SA
+###
+### Full data from the experiment is stored in the file Crosetto_et_al_ERAE2019_data.csv
+###
+### Contact: paolo.crosetto@inra.fr
+
 
 ## libraries
 library(tidyverse)
@@ -9,8 +28,6 @@ library(huxtable)
 
 
 ## TODOs
-# bring all library dependencies to the front up here
-# further clean the initial base 
 #   - see in files below and treat accordingly
 #   - MOVE Table B11 to the paper (as it has changed slightly)
 #   - MOVE Table B10 to the paper (removed one column, normalization by weight)
