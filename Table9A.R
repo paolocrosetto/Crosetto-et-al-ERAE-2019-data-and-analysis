@@ -54,4 +54,4 @@ demo %>%
   write_csv("Tables/TableA9_tests.csv")
 
 ## cleanup
-rm(global, bytreat)
+rm(global, bytreat, demo)

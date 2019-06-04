@@ -102,3 +102,6 @@ output <- output %>%
 
 
 output %>% write_csv("Tables/Table11B.csv")
+
+## cleaning up
+rm(ind, output, reg, reg_bare, reg_poor, reg_middle, reg_rich, regdemo, diff_diff_specification, general_specification)

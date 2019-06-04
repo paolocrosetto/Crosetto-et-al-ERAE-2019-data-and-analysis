@@ -25,7 +25,8 @@ ind <-  df %>%
   summarise(indicator = (sum(FSAKcal))/sum(actual_Kcal))
 
 ## joining into the dataset used for the regression
-reg <- left_join(ind,regdemo, by="subject")
+reg <- left_join(ind,regdemo, by="subject") %>% 
+  mutate(caddy = as_factor(caddy))
 
 
 ## regressions
@@ -76,3 +77,6 @@ output <- output %>%
 
 ## Table 3 -- save to file
 output %>% write_csv("Tables/Table3.csv")
+
+## cleaning up
+rm(ind, reg, reg_bare, reg_poor, reg_middle, reg_rich, regdemo, output)

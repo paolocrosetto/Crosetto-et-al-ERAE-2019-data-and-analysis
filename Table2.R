@@ -48,4 +48,6 @@ ind %>%
   summarise(mean = round(mean(diff, na.rm = T),2)) %>% 
   write_csv("Tables/Table2_diagonal.csv")
 
+## cleaning up
+rm(ind)
 
