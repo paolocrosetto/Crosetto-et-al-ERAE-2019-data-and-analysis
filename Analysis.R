@@ -75,47 +75,10 @@ source("Table8.R")
 source("Table9A.R")
 
 ## Table B.10 - robustness diff-in-diff estimations
+source("Table10B.R")
 
 ## Table B.11 - diff-in-diff with individual controls
 source("Table11B.R")
 
-
-
-#### from here on: OLD STUFF
-
-
-#regression over 'simple' variable
-source("Regressions_FSA.R")
-source("Regressions_FSA_revision.R")
-source("Regressions_FSA_revision_referee.R")
-
-#robustness: LIM
-source("main_plot_EN_paper_LIM.R")
-source("Regressions_LIM.R")
-
-#robustness: salt
-source("main_plot_EN_paper_salt.R")
-source("Regressions_salt.R")
-
-#robustness: fat
-source("main_plot_EN_paper_fat.R")
-source("Regressions_fat.R")
-
-#robustness: sugar
-source("main_plot_EN_paper_sugar.R")
-source("Regressions_sugar.R")
-
-#robustness: AGS
-source("main_plot_EN_paper_ags.R")
-source("Regressions_ags.R")
-
-#robustness: by weight
-source("main_plot_EN_paper_weight.R")
-source("Regressions_weight.R")
-
-source("Regressions_allcontrols.R")
-
-source("Regressions_allcontrols_revision.R")
-
-
+######## Thanks for running the code, this is the end!
 
