@@ -2,7 +2,7 @@
 
 This repository contains data and analysis for the Paolo Crosetto, Anne Lacroix, Laurent Muller, and Bernard Ruffieux ERAE 2019 paper "Nutritional and economic impact of 5 alternative front-of-pack nutritional labels: experimental evidence". It allows anyone to reproduce all the analyses carried out in the paper and to download the data for further analysis.
 
-## Dependencies TEST
+## Dependencies
 
 To run the analysis you need `R` and the following packages (available on CRAN):
 
