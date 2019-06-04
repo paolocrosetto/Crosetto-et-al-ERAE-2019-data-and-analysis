@@ -61,3 +61,6 @@ ggsave("Figures/Figure_1.png", width = 9, height = 4, units = "in", dpi = 300)
 #devtools::install_github("hrbrmstr/hrbrthemes")
 #library(hrbrthemes)
 #fig1 + theme_ipsum_rc()+theme(legend.position = "none")
+
+## cleaning up
+rm(fig1, indicator, summary)

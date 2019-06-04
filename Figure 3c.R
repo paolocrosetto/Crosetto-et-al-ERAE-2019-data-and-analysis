@@ -45,3 +45,5 @@ ns %>% filter(star_NM != "No label") %>% ggplot(aes(star_NM, mdiff, fill=star_NM
   ggtitle("Absolute number of product changes by NutriMark stars, by subject")
 ggsave("Figures/Figure_3c.png", width = 8, height = 5, units = "in", dpi = 300)
 
+# cleaning up
+rm(ns)

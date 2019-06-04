@@ -48,3 +48,6 @@ ns %>% ggplot(aes(key, mdiff))+geom_col(fill="grey70")+theme_minimal()+
   xlab("NutriRepère nutrients")+ylab("Mean % points change, caddy 2 vs caddy 1")+
   ggtitle("Mean number of %points changes by NutriRepere nutrient")
 ggsave("Figures/Figure_3e.png",  width = 8, height = 5, units = "in", dpi = 300)
+
+# cleaning up
+rm(ns)

@@ -46,4 +46,7 @@ ggsave("Figures/Figure_2.png", width = 8, height = 6, units = "in", dpi = 300)
 #library(hrbrthemes)
 #fig2 + theme_ipsum_rc()+theme(legend.position = "none")
 
+## cleaning up
+rm(fig2, ind)
+
         

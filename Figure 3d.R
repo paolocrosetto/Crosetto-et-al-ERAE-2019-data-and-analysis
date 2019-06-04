@@ -49,5 +49,7 @@ ns %>% ggplot(aes(value, mdiff, fill=value))+geom_col()+theme_minimal()+facet_gr
        theme(strip.text = element_text(face = "bold"), legend.position = "none")+
        xlab("NutriCouleur color, by nutrient")+ylab("Mean number of changes, caddy 2 vs caddy 1")+
        ggtitle("Mean number of product changes by NutriCouleur label color, by subjects and nutrient")
-ggsave("Figure_3d.png", width = 8, height = 5, units = "in", dpi = 300)
+ggsave("Figures/Figure_3d.png", width = 8, height = 5, units = "in", dpi = 300)
 
+# cleaning up
+rm(ns)

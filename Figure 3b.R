@@ -49,3 +49,5 @@ ns %>%
   ggtitle("Absolute number of product changes by SENS category, by subject")
 ggsave("Figures/Figure_3b.png", width = 8, height = 5, units = "in", dpi = 300)
 
+## cleaning up
+rm(ns)
