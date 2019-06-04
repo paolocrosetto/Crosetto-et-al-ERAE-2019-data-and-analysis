@@ -17,7 +17,7 @@ library(huxtable)
 #   - MOVE figure 3 (all of it) to the paper just in case
 
 ## import data
-df <- read_csv("usethis.csv")
+df <- read_csv("Crosetto_et_al_ERAE2019_data.csv")
 
 
 ###################
