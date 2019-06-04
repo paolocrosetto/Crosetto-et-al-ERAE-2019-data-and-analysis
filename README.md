@@ -1,6 +1,6 @@
-# Data analysis for the ERAE 2019 paper "Nutritional and Economic Impact of ..." by Crosetto, Lacroix, Muller, Ruffieux
+# Data analysis for the ERAE 2019 paper "Nutritional and economic impact of 5 alternative front-of-pack nutritional labels: experimental evidence" by Crosetto, Lacroix, Muller, Ruffieux
 
-This repository contains data and analysis for the Crosetto, Lacroix, Muller, Ruffieux ERAE 2019 paper "Nutritional and economic impact of 5 alternative front-of-pack nutritional labels: experimental evidence"
+This repository contains data and analysis for the Paolo Crosetto, Anne Lacroix, Laurent Muller, and Bernard Ruffieux ERAE 2019 paper "Nutritional and economic impact of 5 alternative front-of-pack nutritional labels: experimental evidence". It allows anyone to reproduce all the analyses carried out in the paper and to download the data for further analysis.
 
 ## Dependencies 
 
@@ -25,4 +25,6 @@ The analysis is carried out in the file `Analysis.R`. This file:
 
 For each figure or table in the paper, there is one dedicated file. The files are self-standing and can be executed in any order. 
 
-Figures are saved to the `Figures/` folder. 
+Figures are saved to the `Figures/` folder. They are the high-resolution images (and do not fit well in the github preview screen) included in the paper. Some figures are not 100% identical to those in the paper as for the final figures we used the package `hrbrthemes` that is not on CRAN but must be installed via `devtools`. To reduce dependencies the final theme tweakings are not included, but can be turned on by uncommenting the relevant lines at the end of each Figure script. Follow directions therein to install the theme and use it.
+
+Tables are saved to the `Tables/` folder. They contain the exact same information as in the paper, but their formatting is in general different from the one of the paper, because a. some fine-tuning has been done by hand; b. the .tex version of the tables is somewhat different and c. for some tables the results of statistical tests was incorporated by hand. 
