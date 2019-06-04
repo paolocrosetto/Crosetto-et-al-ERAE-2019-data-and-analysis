@@ -14,6 +14,8 @@ library(huxtable)
 #   - eliminate NutriScore limité
 #   - factor levels
 #   - see in files below and treat accordingly
+#   - MOVE Table B11 to the paper (as it has changed slightly)
+#   - MOVE figure 3 (all of it) to the paper just in case
 
 ## import data
 df <- read_csv("alldata_june_4th.csv")
@@ -75,7 +77,7 @@ source("Table9A.R")
 ## Table B.10 - robustness diff-in-diff estimations
 
 ## Table B.11 - diff-in-diff with individual controls
-
+source("Table11B.R")
 
 
 
