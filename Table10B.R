@@ -60,6 +60,6 @@ output <- output %>%
 output %>% write_csv("Tables/Table10B.csv")
 
 ## cleaning up
-rm(reg_salt, reg_sugar, reg_lim, reg_ags, reg_fat, output regression)
+rm(reg_salt, reg_sugar, reg_lim, reg_ags, reg_fat, output, regression)
 
 
